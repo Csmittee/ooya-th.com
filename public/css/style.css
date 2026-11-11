@@ -1,4 +1,4 @@
-/* Ooya — one shared style file. Vanilla CSS, own tokens (CSS-2). Version 2.0 — 2026-11-11. No JavaScript: scroll effects are CSS only. */
+/* Ooya — one shared style file. Vanilla CSS, own tokens (CSS-2). Version 2.1 — 2026-11-11. No JavaScript: scroll effects are CSS only. */
 :root {
   --green: #3F6B4F;
   --green-deep: #2F5039;
@@ -109,6 +109,48 @@ h1 { font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.25; font-weight: 300; t
   }
 }
 
+/* mascot (inline SVG, CSS only, no sound): enters once, then bobs */
+.mascot-stage { position: relative; display: flex; justify-content: center; align-items: flex-end; min-height: 200px; margin-bottom: 8px; }
+.mascot { width: 150px; z-index: 4; filter: drop-shadow(0 14px 12px rgba(47, 80, 57, .28)); animation: m-bob 3s ease-in-out 5.6s infinite; }
+.mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.shout { position: absolute; bottom: 38%; z-index: 5; pointer-events: none; font: 500 clamp(1.5rem, 7vw, 2.75rem)/1 var(--font); letter-spacing: .04em; color: var(--green-deep); -webkit-text-stroke: 1px var(--gold); opacity: 0; animation: m-tx1 5s ease-out .5s both; }
+.sh1 { left: 4%; }
+.sh2 { right: 4%; animation-name: m-tx2; }
+.m-body { transform-origin: 340px 330px; animation: m-jump 5s ease-in-out .5s both; }
+.m-shadow { transform-origin: 340px 332px; animation: m-shad 5s ease-in-out .5s both; }
+.m-armL { transform-origin: 265px 190px; animation: m-armL 5s ease-in-out .5s both; }
+.m-armR { transform-origin: 415px 190px; animation: m-armR 5s ease-in-out .5s both; }
+.m-legL { transform-origin: 305px 280px; animation: m-legL 5s ease-in-out .5s both; }
+.m-legR { transform-origin: 375px 280px; animation: m-legR 5s ease-in-out .5s both; }
+.m-smile { animation: m-sm 5s steps(1) .5s both; }
+.m-open { opacity: 0; animation: m-op 5s steps(1) .5s both; }
+@keyframes m-jump { 0% { transform: translateY(-320px); opacity: 0; } 6% { opacity: 1; } 12% { transform: translateY(0) scale(1.1, .86); } 18% { transform: translateY(0) scale(.96, 1.05); } 24% { transform: none; } 36% { transform: translateY(0) scale(1.07, .9); } 46% { transform: translateY(-85px) scale(.94, 1.08); } 58% { transform: translateY(0) scale(1.09, .88); } 66%, 100% { transform: none; opacity: 1; } }
+@keyframes m-shad { 0%, 10% { opacity: 0; transform: scale(.4); } 14% { opacity: 1; transform: scale(1.1); } 24%, 36% { opacity: 1; transform: none; } 46% { opacity: .5; transform: scale(.6); } 58% { opacity: 1; transform: scale(1.1); } 66%, 100% { opacity: 1; transform: none; } }
+@keyframes m-armL { 0%, 34% { transform: rotate(0); } 46% { transform: rotate(150deg); } 58% { transform: rotate(138deg); } 70% { transform: rotate(160deg); } 80% { transform: rotate(140deg); } 93%, 100% { transform: rotate(0); } }
+@keyframes m-armR { 0%, 34% { transform: rotate(0); } 46% { transform: rotate(-150deg); } 58% { transform: rotate(-138deg); } 70% { transform: rotate(-160deg); } 80% { transform: rotate(-140deg); } 93%, 100% { transform: rotate(0); } }
+@keyframes m-legL { 0%, 36% { transform: rotate(0); } 46% { transform: rotate(-22deg); } 58% { transform: rotate(8deg); } 66%, 100% { transform: rotate(0); } }
+@keyframes m-legR { 0%, 36% { transform: rotate(0); } 46% { transform: rotate(22deg); } 58% { transform: rotate(-8deg); } 66%, 100% { transform: rotate(0); } }
+@keyframes m-sm { 0%, 40% { opacity: 1; } 41%, 66% { opacity: 0; } 67%, 100% { opacity: 1; } }
+@keyframes m-op { 0%, 40% { opacity: 0; } 41%, 66% { opacity: 1; } 67%, 100% { opacity: 0; } }
+@keyframes m-tx1 { 0%, 38% { opacity: 0; transform: scale(.4); } 44% { opacity: 1; transform: scale(1.25); } 50% { opacity: 1; transform: scale(1); } 88% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes m-tx2 { 0%, 50% { opacity: 0; transform: scale(.4); } 56% { opacity: 1; transform: scale(1.25); } 62% { opacity: 1; transform: scale(1); } 88% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(1); } }
+@keyframes m-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@media (min-width: 820px) { .mascot { width: 190px; } .mascot-stage { min-height: 250px; } }
+
+/* falling leaves: fixed colours per leaf, different sizes, speeds and start heights */
+.leaf { position: fixed; top: 0; left: var(--x); width: var(--s); z-index: 5; pointer-events: none; color: var(--c); opacity: .9; will-change: transform; animation: leaf-fall var(--d) linear var(--dl) infinite; }
+.leaf svg { display: block; width: 100%; height: auto; }
+.l1 { --x: 8%;  --s: 26px; --d: 19s; --dl: -3s;  --c: #3F6B4F; --sw: 40px; }
+.l2 { --x: 20%; --s: 20px; --d: 24s; --dl: -11s; --c: #C9A24B; --sw: 30px; }
+.l3 { --x: 33%; --s: 30px; --d: 21s; --dl: -7s;  --c: #D98E3F; --sw: 50px; }
+.l4 { --x: 46%; --s: 18px; --d: 27s; --dl: -16s; --c: #8FB58A; --sw: 36px; }
+.l5 { --x: 58%; --s: 28px; --d: 20s; --dl: -2s;  --c: #C8643C; --sw: 44px; }
+.l6 { --x: 70%; --s: 22px; --d: 25s; --dl: -13s; --c: #E3C25B; --sw: 32px; }
+.l7 { --x: 82%; --s: 26px; --d: 22s; --dl: -9s;  --c: #6E9F5A; --sw: 48px; }
+.l8 { --x: 92%; --s: 20px; --d: 26s; --dl: -18s; --c: #D98A8A; --sw: 34px; }
+@keyframes leaf-fall { 0% { transform: translate(0, -12vh) rotate(0); } 25% { transform: translate(var(--sw), 22vh) rotate(60deg); } 50% { transform: translate(calc(var(--sw) * -1), 50vh) rotate(-30deg); } 75% { transform: translate(var(--sw), 78vh) rotate(80deg); } 100% { transform: translate(0, 112vh) rotate(160deg); } }
+@media (max-width: 599px) { .l4, .l6, .l8 { display: none; } }
+
 @media (min-width: 820px) {
   .hero { padding: 56px 0 56px; }
   .hero-in { display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; gap: 32px; }
@@ -123,5 +165,9 @@ h1 { font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.25; font-weight: 300; t
   html { scroll-behavior: auto; }
   .bfly { display: none; }
   .rise, .bfly svg { animation: none; }
+  .leaf { display: none; }
+  .mascot, .m-body, .m-shadow, .m-armL, .m-armR, .m-legL, .m-legR, .m-smile, .m-open, .shout { animation: none; }
+  .shout { display: none; }
+  .m-open { opacity: 0; }
   .btn { transition: none; }
 }

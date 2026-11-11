@@ -1,8 +1,18 @@
 # CC_CHAT_LOG.md — ooya-th.com
-> Version 1.1 — 2026-11-11
-> Changes: CC_SESSION_ooya_design_pass_v1 entry added
-> Previous: Version 1.0 — 2026-11-10 (First entry (CC_SESSION_ooya_site_setup_v1))
+> Version 1.2 — 2026-11-11
+> Changes: CC_SESSION_ooya_mascot_leaves_v1 entry added
+> Previous: Version 1.1 — 2026-11-11 (CC_SESSION_ooya_design_pass_v1 entry added)
 
+---
+
+## 2026-11-11 — CC_SESSION_ooya_mascot_leaves_v1
+**Did:** 5 files: public/index.html and public/en/index.html (mascot stage as first child of `.hero`, leaf symbol and 8 leaf spans; `<head>` byte-identical), public/css/style.css 2.1 (mascot + leaves CSS before the reduced-motion block, which now hides leaves and words), PROJECT_STATE.md 1.2, this log 1.2. Mascot SVG and CSS exactly as ordered.
+**Updated:** NONE (no rules in this repo)
+**New files:** NONE (no JS, sound or image file)
+**Pending Chat verify:** H1 raw HTML of both pages after the merge (mascot markup, 8 leaves, text and links unchanged); H2 style.css keyframes and reduced-motion block. Not seen by CC: the real motion on a phone (a local render at 3.3 s showed the soap mid-jump with both words and the leaves).
+**Flags:** NOT VERIFIED LIVE. Leaf colours outside the six tokens are intended by the order.
+**Previous PR QA:** ooya-th.com#2 PASS (steps 1, 2, 4, 5 ticked PASS, ALL DONE; step 3 on the owner's report in chat 2026-11-11, per Chat)
+**Owner QA:** this order's site PR, Part 1 steps 1–5 PENDING
 ---
 
 ## 2026-11-11 — CC_SESSION_ooya_design_pass_v1
