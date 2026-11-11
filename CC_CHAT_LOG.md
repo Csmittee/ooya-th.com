@@ -1,8 +1,18 @@
 # CC_CHAT_LOG.md — ooya-th.com
-> Version 1.2 — 2026-11-11
-> Changes: CC_SESSION_ooya_mascot_leaves_v1 entry added
-> Previous: Version 1.1 — 2026-11-11 (CC_SESSION_ooya_design_pass_v1 entry added)
+> Version 1.3 — 2026-11-11
+> Changes: CC_SESSION_ooya_mascot_sticky_v1 entry added
+> Previous: Version 1.2 — 2026-11-11 (CC_SESSION_ooya_mascot_leaves_v1 entry added)
 
+---
+
+## 2026-11-11 — CC_SESSION_ooya_mascot_sticky_v1
+**Did:** 5 files: public/index.html and public/en/index.html (top stage removed from the hero; shouts + mascot at the end of body with wrappers m-walk / m-hop / m-bobber and m-reachL / m-reachR in the SVG; `<head>` and all page text identical), public/css/style.css 2.2 (fixed 75/95 px mascot, m-intro, scroll-driven walk, hop and reach inside the two guards, body bottom padding, reduced-motion line), PROJECT_STATE.md 1.3, this log 1.3.
+**Updated:** NONE (no rules in this repo)
+**New files:** NONE (no JS, sound or image file)
+**Pending Chat verify:** H1 raw HTML of both pages (mascot block at the end of body, none in the hero); H2 style.css keyframes and guards. Not seen by CC: real scroll motion on a phone (local render at 390 px showed the small mascot at the bottom, and it had moved after a scroll; hero starts at the top).
+**Flags:** NOT VERIFIED LIVE.
+**Previous PR QA:** ooya-th.com#3 PASS (closed by CC from ticks, 2026-11-11)
+**Owner QA:** this order's site PR, Part 1 steps 1–5 PENDING
 ---
 
 ## 2026-11-11 — CC_SESSION_ooya_mascot_leaves_v1

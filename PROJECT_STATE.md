@@ -1,7 +1,7 @@
 # PROJECT_STATE.md — ooya-th.com
-> Version 1.2 — 2026-11-11
-> Changes: mascot entrance and falling leaves (CC_SESSION_ooya_mascot_leaves_v1); design pass marked DONE (owner QA passed)
-> Previous: Version 1.1 — 2026-11-11 (design pass (CC_SESSION_ooya_design_pass_v1): richer one-page landing in both languages, Prompt font, fixed background, CSS-only scroll effects, butterflies, favicon, AI notes, Facebook link and QR, hero og:image)
+> Version 1.3 — 2026-11-11
+> Changes: mascot moved to a fixed small figure at the bottom, scroll-driven walk and gestures (CC_SESSION_ooya_mascot_sticky_v1); mascot entrance + leaves marked DONE (owner QA passed)
+> Previous: Version 1.2 — 2026-11-11 (mascot entrance and falling leaves (CC_SESSION_ooya_mascot_leaves_v1); design pass marked DONE (owner QA passed))
 
 Status words follow WF-6.
 
@@ -10,7 +10,8 @@ Status words follow WF-6.
 |---|---|
 | First page (public/index.html Thai, public/en/index.html English, css/style.css) | DONE (verified live 2026-11-10 — owner QA passed, ticks read by CC) — ooya-th.com#1 |
 | Design pass (hero 1, five steps, fixed background, butterflies, logo, favicon, Facebook QR) | DONE (verified live 2026-11-11 — owner QA passed, per Chat) — ooya-th.com#2 (step 3 on the owner's report in chat) |
-| Mascot entrance + falling leaves (hero top, 8 leaves) | DONE (pending owner QA) — NOT VERIFIED LIVE — owner QA steps 1–5 on the mascot PR |
+| Mascot entrance + falling leaves (hero top, 8 leaves) | DONE (verified live 2026-11-11 — owner QA passed, ticks read by CC) — ooya-th.com#3 |
+| Mascot moved to the bottom (fixed, half size, scroll-driven walk and gestures) | DONE (pending owner QA) — NOT VERIFIED LIVE — owner QA steps 1–5 on the sticky PR |
 | 404, robots.txt, _headers | DONE (pending owner QA) — NOT VERIFIED LIVE |
 | sitemap.xml | DONE (pending owner QA) — hand-written, 2 pages (no generator in this repo; SEO-8 amendment) |
 | Cloudflare Pages output directory `public` | QUEUED — owner does the taps after merge (Chat gives them) |
@@ -43,3 +44,9 @@ none yet — site new (no pages known / indexed, no impressions or clicks, sitem
 - Leaves: symbol `#lf` plus 8 `.leaf` spans (`.l1`–`.l8`), fixed colours per leaf (greens, golds, orange, red, pink), `leaf-fall` is time-based; 5 shown under 600px. Colours outside the brand tokens are deliberate (autumn tones, owner decision).
 - `prefers-reduced-motion: reduce`: leaves and words hidden, mascot stands still smiling.
 - Infinite animations now: butterflies (`drift`, `flap`), `m-bob`, `leaf-fall`. `m-jump` runs once.
+
+## Mascot sticky (2026-11-11, CC_SESSION_ooya_mascot_sticky_v1)
+- The mascot is no longer in the hero: `.shout` ×2 and `.mascot` are the last children of `<body>` after `</footer>`; `.mascot-stage` deleted. Hero starts at `.wrap.hero-in` again (no extra space on top).
+- `.mascot` is `position: fixed` at the bottom centre, 75 px (95 px from 820 px), `pointer-events: none`; body bottom padding 72 / 92 px keeps the footer's last line visible. Wrappers `.m-walk > .m-hop > .m-bobber` (and `.m-reachL/.m-reachR` inside the SVG arms) so each transform has its own element.
+- Intro `m-intro` 6.5 s (big in the middle, words, then shrink and travel down); then `m-bob` from 7 s. With scroll (`@supports (animation-timeline: scroll())` + `no-preference` only): `m-walk` (left/right), `m-hop`, `m-reachL`, `m-reachR` on `scroll(root)`. Unsupported: stands and bobs. Reduced motion: no animation, stands at the bottom, no words.
+- Still no JavaScript, sound or image file; one `<script>` per page (ld+json). style.css 2.2.

@@ -1,4 +1,4 @@
-/* Ooya — one shared style file. Vanilla CSS, own tokens (CSS-2). Version 2.1 — 2026-11-11. No JavaScript: scroll effects are CSS only. */
+/* Ooya — one shared style file. Vanilla CSS, own tokens (CSS-2). Version 2.2 — 2026-11-11. No JavaScript: scroll effects are CSS only. */
 :root {
   --green: #3F6B4F;
   --green-deep: #2F5039;
@@ -109,13 +109,32 @@ h1 { font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.25; font-weight: 300; t
   }
 }
 
-/* mascot (inline SVG, CSS only, no sound): enters once, then bobs */
-.mascot-stage { position: relative; display: flex; justify-content: center; align-items: flex-end; min-height: 200px; margin-bottom: 8px; }
-.mascot { width: 150px; z-index: 4; filter: drop-shadow(0 14px 12px rgba(47, 80, 57, .28)); animation: m-bob 3s ease-in-out 5.6s infinite; }
+/* mascot (inline SVG, CSS only, no sound): fixed small at the bottom; intro, then walks and reaches with the scroll */
+.mascot { --mw: 75px; position: fixed; z-index: 4; bottom: 6px; left: calc(50% - var(--mw) / 2); width: var(--mw); pointer-events: none; transform-origin: 50% 100%; animation: m-intro 6.5s ease-in-out .5s both; }
+@media (min-width: 820px) { .mascot { --mw: 95px; } }
+.m-walk, .m-hop, .m-bobber { display: block; }
+.m-bobber { filter: drop-shadow(0 8px 8px rgba(47, 80, 57, .28)); animation: m-bob 3s ease-in-out 7s infinite; }
 .mascot svg { display: block; width: 100%; height: auto; overflow: visible; }
-.shout { position: absolute; bottom: 38%; z-index: 5; pointer-events: none; font: 500 clamp(1.5rem, 7vw, 2.75rem)/1 var(--font); letter-spacing: .04em; color: var(--green-deep); -webkit-text-stroke: 1px var(--gold); opacity: 0; animation: m-tx1 5s ease-out .5s both; }
-.sh1 { left: 4%; }
-.sh2 { right: 4%; animation-name: m-tx2; }
+.m-reachL { transform-origin: 265px 190px; }
+.m-reachR { transform-origin: 415px 190px; }
+.shout { position: fixed; top: 46vh; z-index: 5; pointer-events: none; font: 500 clamp(1.5rem, 7vw, 2.75rem)/1 var(--font); letter-spacing: .04em; color: var(--green-deep); -webkit-text-stroke: 1px var(--gold); opacity: 0; animation: m-tx1 5s ease-out .5s both; }
+.sh1 { right: calc(50% + 12vmin); }
+.sh2 { left: calc(50% + 12vmin); animation-name: m-tx2; }
+body { padding-bottom: 72px; }
+@media (min-width: 820px) { body { padding-bottom: 92px; } }
+@keyframes m-intro { 0%, 77% { transform: translate(0, -38vh) scale(2.2); } 92% { transform: translate(0, 0) scale(1); } 96% { transform: scale(1.1, .9); } 100% { transform: none; } }
+@keyframes m-walk { 0% { transform: translateX(0); } 10% { transform: translateX(-26vw); } 22% { transform: translateX(12vw); } 34% { transform: translateX(34vw); } 47% { transform: translateX(-8vw); } 60% { transform: translateX(-34vw); } 73% { transform: translateX(-4vw); } 86% { transform: translateX(28vw); } 100% { transform: translateX(0); } }
+@keyframes m-hop { 0%, 8%, 12%, 20%, 24%, 32%, 36%, 45%, 49%, 58%, 62%, 71%, 75%, 84%, 88%, 100% { transform: translateY(0); } 10%, 34%, 60%, 86% { transform: translateY(-16px); } 22%, 47%, 73% { transform: translateY(-12px); } }
+@keyframes m-reachL { 0%, 6%, 14%, 43%, 51%, 69%, 77%, 100% { transform: rotate(0); } 10%, 47%, 73% { transform: rotate(150deg); } }
+@keyframes m-reachR { 0%, 18%, 26%, 30%, 38%, 56%, 64%, 82%, 90%, 100% { transform: rotate(0); } 22%, 34%, 60%, 86% { transform: rotate(-150deg); } }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .m-walk { animation: m-walk linear both; animation-timeline: scroll(root); }
+    .m-hop { animation: m-hop linear both; animation-timeline: scroll(root); }
+    .m-reachL { animation: m-reachL linear both; animation-timeline: scroll(root); }
+    .m-reachR { animation: m-reachR linear both; animation-timeline: scroll(root); }
+  }
+}
 .m-body { transform-origin: 340px 330px; animation: m-jump 5s ease-in-out .5s both; }
 .m-shadow { transform-origin: 340px 332px; animation: m-shad 5s ease-in-out .5s both; }
 .m-armL { transform-origin: 265px 190px; animation: m-armL 5s ease-in-out .5s both; }
@@ -135,7 +154,6 @@ h1 { font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.25; font-weight: 300; t
 @keyframes m-tx1 { 0%, 38% { opacity: 0; transform: scale(.4); } 44% { opacity: 1; transform: scale(1.25); } 50% { opacity: 1; transform: scale(1); } 88% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(1); } }
 @keyframes m-tx2 { 0%, 50% { opacity: 0; transform: scale(.4); } 56% { opacity: 1; transform: scale(1.25); } 62% { opacity: 1; transform: scale(1); } 88% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(1); } }
 @keyframes m-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@media (min-width: 820px) { .mascot { width: 190px; } .mascot-stage { min-height: 250px; } }
 
 /* falling leaves: fixed colours per leaf, different sizes, speeds and start heights */
 .leaf { position: fixed; top: 0; left: var(--x); width: var(--s); z-index: 5; pointer-events: none; color: var(--c); opacity: .9; will-change: transform; animation: leaf-fall var(--d) linear var(--dl) infinite; }
@@ -166,6 +184,7 @@ h1 { font-size: clamp(2rem, 7vw, 2.9rem); line-height: 1.25; font-weight: 300; t
   .bfly { display: none; }
   .rise, .bfly svg { animation: none; }
   .leaf { display: none; }
+  .m-bobber, .m-walk, .m-hop, .m-reachL, .m-reachR { animation: none; }
   .mascot, .m-body, .m-shadow, .m-armL, .m-armR, .m-legL, .m-legR, .m-smile, .m-open, .shout { animation: none; }
   .shout { display: none; }
   .m-open { opacity: 0; }
