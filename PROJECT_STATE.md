@@ -1,7 +1,7 @@
 # PROJECT_STATE.md — ooya-th.com
-> Version 1.3 — 2026-11-11
-> Changes: mascot moved to a fixed small figure at the bottom, scroll-driven walk and gestures (CC_SESSION_ooya_mascot_sticky_v1); mascot entrance + leaves marked DONE (owner QA passed)
-> Previous: Version 1.2 — 2026-11-11 (mascot entrance and falling leaves (CC_SESSION_ooya_mascot_leaves_v1); design pass marked DONE (owner QA passed))
+> Version 1.4 — 2026-11-11
+> Changes: JavaScript added (public/js/ooya.js), glass blocks, OOYA background words, JS leaves and butterflies, new mascot eyes (CC_SESSION_ooya_js_glass_bg_v1); sticky mascot marked DONE (owner QA passed)
+> Previous: Version 1.3 — 2026-11-11 (mascot moved to a fixed small figure at the bottom, scroll-driven walk and gestures (CC_SESSION_ooya_mascot_sticky_v1); mascot entrance + leaves marked DONE)
 
 Status words follow WF-6.
 
@@ -11,7 +11,8 @@ Status words follow WF-6.
 | First page (public/index.html Thai, public/en/index.html English, css/style.css) | DONE (verified live 2026-11-10 — owner QA passed, ticks read by CC) — ooya-th.com#1 |
 | Design pass (hero 1, five steps, fixed background, butterflies, logo, favicon, Facebook QR) | DONE (verified live 2026-11-11 — owner QA passed, per Chat) — ooya-th.com#2 (step 3 on the owner's report in chat) |
 | Mascot entrance + falling leaves (hero top, 8 leaves) | DONE (verified live 2026-11-11 — owner QA passed, ticks read by CC) — ooya-th.com#3 |
-| Mascot moved to the bottom (fixed, half size, scroll-driven walk and gestures) | DONE (pending owner QA) — NOT VERIFIED LIVE — owner QA steps 1–5 on the sticky PR |
+| Mascot moved to the bottom (fixed, half size, scroll-driven walk and gestures) | DONE (verified live 2026-11-11 — owner QA passed, ticks read by CC) — ooya-th.com#4 |
+| JavaScript motion, glass blocks, OOYA background words, new butterflies (order 5) | DONE (pending owner QA) — NOT VERIFIED LIVE — owner QA steps 1–5 on the order 5 PR |
 | 404, robots.txt, _headers | DONE (pending owner QA) — NOT VERIFIED LIVE |
 | sitemap.xml | DONE (pending owner QA) — hand-written, 2 pages (no generator in this repo; SEO-8 amendment) |
 | Cloudflare Pages output directory `public` | QUEUED — owner does the taps after merge (Chat gives them) |
@@ -30,7 +31,7 @@ Status words follow WF-6.
 none yet — site new (no pages known / indexed, no impressions or clicks, sitemap not yet submitted, no audit).
 
 ## Design pass facts (2026-11-11, CC_SESSION_ooya_design_pass_v1)
-- **No JavaScript. Scroll effects are CSS only** (`animation-timeline: view()` for the block bounce-in and `scroll(root)` for the butterfly drift, both inside `@supports`; unsupported browsers show every block plainly). `prefers-reduced-motion: reduce` = no motion, butterflies hidden, smooth scroll off. The only `<script>` per page is the existing ld+json.
+- **(Superseded by order 5: JavaScript is allowed, see below.) Scroll effects were CSS only** (`animation-timeline: view()` for the block bounce-in and `scroll(root)` for the butterfly drift, both inside `@supports`; unsupported browsers show every block plainly). `prefers-reduced-motion: reduce` = no motion, butterflies hidden, smooth scroll off. The only `<script>` per page is the existing ld+json.
 - **Font:** Prompt only (Google Fonts, weights 300, 400, 500, display=swap). Cormorant Garamond, Inter and both Noto families removed.
 - **Fixed background:** `.bg` layer (position fixed, z-index -1), never `background-attachment: fixed`. Blocks are floating rounded cards; glass (`backdrop-filter`) only inside `@supports`, solid cream fallback.
 - **Cloudinary** (cloud dfiomi0lb; GEN = `Business/Ooya%20project/ooya_website_generated/`): hero v1794405439 `hero_top_v1.jpg` · step 1 v1794405554 `step_1_prepare_v1.jpg` · step 2 v1794405556 `step_2_blend_v1.jpg` · step 3 v1794405559 `step_3_cure_v1.jpg` · step 4 v1794405563 `step_4_slice_v1.jpg` · step 5 v1794405566 `step_5_pack_v1.jpg` · logo v1794405626 `ooya_logo_transparent_v1.png` · Facebook QR v1794405632 `ooya_facebook_QR_v1.png` · favicon v1794405748 `ooya_favicon_512_v1.png` · LINE QR v1794249996 (donotmove folder, unchanged). Favicon links use `f_png,c_limit,w_N`.
@@ -50,3 +51,11 @@ none yet — site new (no pages known / indexed, no impressions or clicks, sitem
 - `.mascot` is `position: fixed` at the bottom centre, 75 px (95 px from 820 px), `pointer-events: none`; body bottom padding 72 / 92 px keeps the footer's last line visible. Wrappers `.m-walk > .m-hop > .m-bobber` (and `.m-reachL/.m-reachR` inside the SVG arms) so each transform has its own element.
 - Intro `m-intro` 6.5 s (big in the middle, words, then shrink and travel down); then `m-bob` from 7 s. With scroll (`@supports (animation-timeline: scroll())` + `no-preference` only): `m-walk` (left/right), `m-hop`, `m-reachL`, `m-reachR` on `scroll(root)`. Unsupported: stands and bobs. Reduced motion: no animation, stands at the bottom, no words.
 - Still no JavaScript, sound or image file; one `<script>` per page (ld+json). style.css 2.2.
+
+## JavaScript, glass, OOYA background (2026-11-11, CC_SESSION_ooya_js_glass_bg_v1)
+- **JavaScript is a situational choice** (owner 2026-11-11): never mandatory, never banned; vanilla only (no framework, no library); the page must stay complete if the script fails; no network, cookie, storage or eval; motion off under `prefers-reduced-motion`. CLAUDE.md 1.1 says so. Files: `public/js/ooya.js` (one IIFE in try/catch, under 800 lines) loaded once with `defer` at the end of `<body>`; a one-line inline script in `<head>` sets class `js` on `<html>`. Scripts per page: ld+json, the head one-liner, ooya.js.
+- **With class `js`:** CSS hides the CSS-only `.leaf` / `.bfly` and stops the scroll-driven mascot walk; JS owns them. Without JS the old CSS motion is the fallback.
+- **Mascot after the intro** (animationend on `.mascot`, 7.2 s fallback): x follows a sine of the scroll position, smoothed (0.35 s) and capped at 120 px/s (phone 90); walk cycle on legs, opposite arm swing, idle wave, hops, blink every 2–5 s, pupils lean, smile / open mouth. Eyes are now `.m-eyeL` / `.m-eyeR` with `.m-pup` (the old arc eyes were replaced).
+- **OOYA words** (`.ow-layer`, built by JS, 14 desktop / 8 phone, random size, angle, palette colour, opacity .10–.20, at least 40% on a screen edge, pop in once); **leaves** 10 / 6 and **butterflies** 3 / 2 (Classic gold and Swallowtail, both on every screen) on their own clock, scroll gives a small push only.
+- **Glass:** `.panel`, `.card`, `.band-in` (dark green glass) and `.bar` over the fixed `.bg`; tint rgba(251,248,241,.66), blur 10 px (6 px phone) inside `@supports`, fallback .92. `.rise` now animates the content inside a block, never the blurred frame.
+- Prompt font is loaded at weights 300, 400, 500 only (head unchanged): the 600 / 700 OOYA words use the browser's synthetic bold of 500.

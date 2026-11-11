@@ -1,8 +1,18 @@
 # CC_CHAT_LOG.md — ooya-th.com
-> Version 1.3 — 2026-11-11
-> Changes: CC_SESSION_ooya_mascot_sticky_v1 entry added
-> Previous: Version 1.2 — 2026-11-11 (CC_SESSION_ooya_mascot_leaves_v1 entry added)
+> Version 1.4 — 2026-11-11
+> Changes: CC_SESSION_ooya_js_glass_bg_v1 entry added
+> Previous: Version 1.3 — 2026-11-11 (CC_SESSION_ooya_mascot_sticky_v1 entry added)
 
+---
+
+## 2026-11-11 — CC_SESSION_ooya_js_glass_bg_v1
+**Did:** 8 files: public/js/ooya.js (NEW, 1.0), public/index.html and public/en/index.html (head one-liner, script tag at the end of body, mascot eyes; nothing else), public/css/style.css 2.3 (glass, `.rise` on content, JS hooks, fx and OOYA layers, reduced motion), CLAUDE.md 1.1, PROJECT_STATE.md 1.4, this log 1.4.
+**Updated:** NONE (no rules in this repo). README.md still says "no JavaScript" (not on the order's list; Chat to decide).
+**New files:** public/js/ooya.js.
+**Pending Chat verify:** H1 raw HTML of both pages; H2 ooya.js and style.css. Not seen by CC: real behaviour on the owner's desktop (checked headless: counts, cap 120 px/s, reduced motion, no errors).
+**Flags:** NOT VERIFIED LIVE. Prompt weights 600 / 700 are not loaded (head unchanged), so OOYA words use synthetic bold.
+**Previous PR QA:** ooya-th.com#4 PASS (closed by CC from ticks, 2026-11-11)
+**Owner QA:** this order's site PR, Part 1 steps 1–5 PENDING
 ---
 
 ## 2026-11-11 — CC_SESSION_ooya_mascot_sticky_v1
